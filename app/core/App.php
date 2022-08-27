@@ -3,37 +3,39 @@
 
 class App {
 
-    protected $controller = 'home';
+    protected $controller = 'homeController';
     protected $method     = 'index';
     protected $params     = [];
 
-
-
     public function __construct() {
-        $url = $this->parseURL();
-        if(isset($url[0])){
-            if(file_exists('../app/controllers/'.$url[0].'.php')){
-                $this->controller = $url[0];
-                unset($url[0]);
+        
+        if(isset($_GET['controller'])){
+            if(file_exists('app/controllers/'.$_GET['controller'].'.php')){
+                $this->controller =$_GET['controller'];
+                unset($_GET['controller']);
             }
         }
-        require_once('../app/controllers/'.$this->controller.'.php');
+        require_once('app/controllers/'.$this->controller.'.php');
         $this->controller = new $this->controller;
-        if(isset($url[1])){
-            if(method_exists($this->controller,$url[1])){
-                $this->method = $url[1];
-                unset($url[1]);
+
+
+        if(isset($_GET['page'])){
+            if(method_exists($this->controller,$_GET['page'])){
+                $this->method = $_GET['page'];
+                unset($_GET['page']);
+            }else{
+                $this->method="error404";
+                $this->controller = 'homeController';
+                require_once('app/controllers/'.$this->controller.'.php');
+                $this->controller = new $this->controller;
             }
         }
-        $this->params = $url ? array_values($url) : [];
+
+        
+        $this->params = array("GET"=>$_GET,"POST"=>$_POST);
         call_user_func_array([$this->controller,$this->method],$this->params);
     }
 
-    public function parseURL(){
-        if(isset($_GET['url'])){
-            return $url = explode('/',filter_var(rtrim($_GET['url'],'/'),FILTER_SANITIZE_URL));
-        }
-    }
 
 }
 

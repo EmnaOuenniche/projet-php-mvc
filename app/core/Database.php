@@ -2,11 +2,6 @@
 
 class DataBase {
 
-    private $db_host = "localhost";
-    private $db_user = "root";
-    private $db_pass = "Kalilinux1@";
-    private $db_name = "";
-
     protected $pdo;
 
     public function __construct() {
@@ -14,16 +9,20 @@ class DataBase {
     }
 
     private function getHost(){
-        return $this->db_host;
+        return $GLOBALS['DB_HOST'];
     }
+
     private function getUser(){
-        return $this->db_user;
+        return $GLOBALS['DB_USER'];
     }
+
     private function getPass(){
-        return $this->db_pass;
+        return $GLOBALS['DB_PASS'];
     }
+
     private function getName(){
-        return $this->db_name;
+        return $GLOBALS['DB_NAME'];
     }
+    
 }
 ?>
