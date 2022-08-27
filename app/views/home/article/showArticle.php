@@ -45,12 +45,12 @@
         </div>
         <div class="col-sm-6">
             <div class="mb-3">
-                <label  class="form-label">Donner votre note</label><br>
-                <a href="" class="btn btn-secondary btn-sm">1</a>
-                <a href="" class="btn btn-secondary btn-sm">2</a>
-                <a href="" class="btn btn-secondary btn-sm">3</a>
-                <a href="" class="btn btn-secondary btn-sm">4</a>
-                <a href="" class="btn btn-secondary btn-sm">5</a>
+                <label  class="form-label">Donner votre note (votre : <?=$data['article']['note'] ?>)</label><br>
+                <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=1" class="btn btn-secondary btn-sm">1</a>
+                <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=2" class="btn btn-secondary btn-sm">2</a>
+                <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=3" class="btn btn-secondary btn-sm">3</a>
+                <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=4" class="btn btn-secondary btn-sm">4</a>
+                <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=5" class="btn btn-secondary btn-sm">5</a>
             </div>
         </div>
         <div class="col-sm-12">

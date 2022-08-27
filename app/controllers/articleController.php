@@ -5,12 +5,13 @@ class articleController extends Controller {
     private $user;
     private $article;
     private $comment;
+    private $note;
 
     public function __construct(){
-        $this->user = $this->model('user');
+        $this->user    = $this->model('user');
         $this->article = $this->model('article');
         $this->comment = $this->model('comment'); 
-
+        $this->note    = $this->model('note');
     }
 
 
@@ -43,7 +44,6 @@ class articleController extends Controller {
             for($i=0;$i<count($myArticlesList);$i++){
                 $myArticlesList[$i]['image'] = "assets/uploads/".$myArticlesList[$i]['image'];
                 $myArticlesList[$i]['date']  = date('d/m/Y H:i:s',$myArticlesList[$i]['date']);
-                
                 if($myArticlesList[$i]['status'] == 0){
                     $myArticlesList[$i]['status'] = "Pas accepté";
                 }else{
@@ -66,6 +66,7 @@ class articleController extends Controller {
         $articleDetailes['date']  = date('d/m/Y H:i:s',$articleDetailes['date']);
         $articleDetailes['user'] = ($this->user->getUserDataById($articleDetailes['user_id']))['name'];
         $articleDetailes['comments'] = $this->comment->getByArticleID($articleDetailes['id']);
+        $articleDetailes['note'] = $this->note->getNoteByUserId($articleDetailes['id'],$_SESSION['id']);
         $this->view('home/article/showArticle',$data = ["article"=>$articleDetailes]);
     }
 
