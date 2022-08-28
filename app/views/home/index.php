@@ -25,7 +25,7 @@
                         echo '
                         <div class="col-sm-4 pt-4 pb-4">
                             <div class="card" style="width:100%">
-                                <img src="'.$article['image'].'" class="card-img-top" width="100%" height="auto">
+                                <img src="'.$article['image'].'" class="card-img-top" width="100%" height="350px">
                                 <div class="card-body">
                                     <h5 class="card-title">'.$article['title'].'</h5>
                                     <p class="card-text"><b>Auteur : </b>'.$article['user'].'</p>

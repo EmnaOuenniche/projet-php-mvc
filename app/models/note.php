@@ -10,14 +10,12 @@ class note extends DataBase{
         $res = $this->pdo->prepare("select * from article_notes where article_id = ? and user_id = ?");
         $res->execute(array($articleId,$userId));
         if(count($res->fetchAll(PDO::FETCH_ASSOC))>0){
-            echo 'update note';
-            //update
+            //update existing note
             $res = $this->pdo->prepare("update article_notes set note = ? where user_id = ? and article_id = ? ");
             $res->execute(array($note,$userId,$articleId));
             return true;
         }else{
-            //insert
-            echo 'new note';
+            //insert new note
             $res = $this->pdo->prepare("insert into article_notes(article_id,user_id,note) values(?,?,?)");
             $res->execute(array($articleId,$userId,$note));
             return true;
@@ -33,6 +31,18 @@ class note extends DataBase{
         }else{
             return 0;
         }
+    }
+
+    public function getNoteAVG($articleId){
+        $res = $this->pdo->prepare("select AVG(note) from article_notes where article_id = ?");
+        $res->execute(array($articleId));
+        return $res->fetch(PDO::FETCH_ASSOC)['AVG(note)'];
+    }
+
+    public function getNotesCount($articleId){
+        $res = $this->pdo->prepare("select * from article_notes where article_id = ?");
+        $res->execute(array($articleId));
+        return count($res->fetchAll(PDO::FETCH_ASSOC));
     }
 
 }

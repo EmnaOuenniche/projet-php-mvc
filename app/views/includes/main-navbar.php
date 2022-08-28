@@ -7,7 +7,7 @@
             if($_SESSION['role'] == "3"){
               // lecteur - normal user
               echo '
-                <li class="nav-item"><a href="?controller=favoritsController&page=MyFavorits" class="nav-link link-dark px-2">Favoris</a></li>
+                <li class="nav-item"><a href="?controller=favoritController&page=listFavorit" class="nav-link link-dark px-2">Favoris</a></li>
               ';
             }
             if($_SESSION['role'] == "2"){
@@ -20,8 +20,8 @@
             if($_SESSION['role'] == "1"){
               // lecteur - Admin
               echo '
-                <li class="nav-item"><a href="?controller=adminController&page=MyFavorits" class="nav-link link-dark px-2">Articles</a></li>
-                <li class="nav-item"><a href="?controller=adminController&page=MyFavorits" class="nav-link link-dark px-2">Utilisateurs</a></li>
+                <li class="nav-item"><a href="?controller=adminController&page=listArticles" class="nav-link link-dark px-2">Articles</a></li>
+                <li class="nav-item"><a href="?controller=adminController&page=users" class="nav-link link-dark px-2">Utilisateurs</a></li>
               ';
             }
           }

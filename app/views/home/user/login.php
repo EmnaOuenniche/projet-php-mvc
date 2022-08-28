@@ -24,7 +24,7 @@
                     <input name="email" type="email" class="form-control" placeholder="Email">
                 </div><br>
                 <div class="form-group">
-                    <input name="pass" type="test" class="form-control" placeholder="Mot de passe">
+                    <input name="pass" type="password" class="form-control" placeholder="Mot de passe">
                 </div><br>
                 <input type="submit" class="btn btn-primary" value="connexion"/>
             </form>

@@ -6,12 +6,14 @@ class articleController extends Controller {
     private $article;
     private $comment;
     private $note;
+    private $favorit;
 
     public function __construct(){
         $this->user    = $this->model('user');
         $this->article = $this->model('article');
         $this->comment = $this->model('comment'); 
         $this->note    = $this->model('note');
+        $this->favorit = $this->model('favorit');
     }
 
 
@@ -60,14 +62,22 @@ class articleController extends Controller {
     }
 
     public function article(){
-        $articleID = $_GET['id'];
-        $articleDetailes = $this->article->getById($articleID);
-        $articleDetailes['image'] = "assets/uploads/".$articleDetailes['image'];
-        $articleDetailes['date']  = date('d/m/Y H:i:s',$articleDetailes['date']);
-        $articleDetailes['user'] = ($this->user->getUserDataById($articleDetailes['user_id']))['name'];
-        $articleDetailes['comments'] = $this->comment->getByArticleID($articleDetailes['id']);
-        $articleDetailes['note'] = $this->note->getNoteByUserId($articleDetailes['id'],$_SESSION['id']);
-        $this->view('home/article/showArticle',$data = ["article"=>$articleDetailes]);
+        if($this->user->isConnected()){
+            $articleID = $_GET['id'];
+            $articleDetailes = $this->article->getById($articleID);
+            $articleDetailes['image'] = "assets/uploads/".$articleDetailes['image'];
+            $articleDetailes['date']  = date('d/m/Y H:i:s',$articleDetailes['date']);
+            $articleDetailes['user'] = ($this->user->getUserDataById($articleDetailes['user_id']))['name'];
+            $articleDetailes['comments'] = $this->comment->getByArticleID($articleDetailes['id']);
+            $articleDetailes['note'] = $this->note->getNoteByUserId($articleDetailes['id'],$_SESSION['id']);
+            $articleDetailes['AVGnote'] =$this->note->getNoteAVG($articleDetailes['id']);
+            $articleDetailes['notesCount'] =$this->note->getNotesCount($articleDetailes['id']);
+            $articleDetailes['isFavorit'] = $this->favorit->isfavorit($_SESSION['id'],$articleDetailes['id']);
+            $this->view('home/article/showArticle',$data = ["article"=>$articleDetailes]);
+        }else{
+            header('location:index.php?controller=userController&page=login');
+        }
+        
     }
 
 }

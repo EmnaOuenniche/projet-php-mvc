@@ -11,9 +11,13 @@ class comment extends DataBase{
         return true;
     }
     public function getByArticleID($id){
-        $res = $this->pdo->prepare("select * from article_comments,users where article_comments.article_id=? and article_comments.user_id = users.id");
+        $res = $this->pdo->prepare("select * from article_comments where article_id=?");
         $res->execute(array($id));
         return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function delete($id){
+        $res = $this->pdo->prepare("delete from banners where id = ?");
+        return $res->execute(array($id));
     }
 
 }

@@ -20,7 +20,7 @@
                 <p>
                     <b>Date Creation : </b> <?=$data['article']['date']?><br>
                     <b>Auteur / propriétaire : </b><?=$data['article']['user']?><br>
-                    <b>Avis :</b> 4.3(8 avis)<br>
+                    <b>Avis :</b> <?=$data['article']['AVGnote']?> (<?=$data['article']['notesCount']?> avis)<br>
                 </p>
             </div>
             
@@ -34,7 +34,7 @@
         <div class="col-sm-12">
             <h3>Commentaires</h3>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <form action="?controller=commentController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>" method="POST">
                 <div class="mb-3">
                     <label  class="form-label">Ecrire un Commentaire</label>
@@ -43,15 +43,28 @@
                 <input type="submit" class="btn btn-primary btn-sm" value="ajouter commentaire">
             </form>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <div class="mb-3">
-                <label  class="form-label">Donner votre note (votre : <?=$data['article']['note'] ?>)</label><br>
+                <label  class="form-label">Donner votre note (votre reponse : <?=$data['article']['note'] ?>)</label><br>
                 <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=1" class="btn btn-secondary btn-sm">1</a>
                 <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=2" class="btn btn-secondary btn-sm">2</a>
                 <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=3" class="btn btn-secondary btn-sm">3</a>
                 <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=4" class="btn btn-secondary btn-sm">4</a>
                 <a href="?controller=noteController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>&note=5" class="btn btn-secondary btn-sm">5</a>
             </div>
+        </div>
+        <div class="col-sm-2">
+            <?php
+                if($data['article']['isFavorit']){
+                    echo '
+                        <a href="?controller=favoritController&page=add&user_id='.$_SESSION['id'].'&article_id='.$_GET['id'].'" class="btn btn-danger btn-sm">supprimer favoris</a>
+                    ';
+                }else{
+                    echo '
+                        <a href="?controller=favoritController&page=remove&user_id='.$_SESSION['id'].'&article_id='.$_GET['id'].'" class="btn btn-primary btn-sm">Ajouter au favoris</a>
+                    ';
+                }
+            ?>
         </div>
         <div class="col-sm-12">
             <!-- List of Comments -->
