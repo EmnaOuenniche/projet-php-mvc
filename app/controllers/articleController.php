@@ -80,6 +80,46 @@ class articleController extends Controller {
         
     }
 
+    public function delete(){
+        if($this->user->isConnected()){
+            $this->article->delete($_GET['id']);
+            header('location:?controller=articleController&page=myArticles');
+        }else{
+            header('location:index.php?controller=userController&page=login');
+        }
+    }
+
+    public function edit(){
+        if($this->user->isConnected()){
+            $articleDetailes = $this->article->getById($_GET['id']);
+            if(isset($_POST['title']) && isset($_POST['content'])){
+                
+                if(isset($_FILES["image"])){
+                    //upload new image here !
+                    $filename = rand(1,10000).'-'.rand(1,10000).'-'.time().'-'.rand(1,10000).'-'.basename($_FILES["image"]["name"]) ;
+                    $uploadfile = "./assets/uploads/".$filename;
+                    
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile)) {
+                        $image = $filename;
+                    } else {
+                        $image = "";
+                    }
+                }else{
+                   $image = $articleDetailes['image'];
+                }
+                
+
+                $edited = $this->article->edit($articleDetailes['id'],$_POST['title'],$image,$_POST['content']);
+            }
+            if($edited){
+                header('location:?controller=articleController&page=edit&id='.$articleDetailes['id']);
+            }
+            $this->view('home/article/editArticle',["article"=>$articleDetailes]);
+        }else{
+            header('location:index.php?controller=userController&page=login');
+        }
+    }
+
 }
 
 

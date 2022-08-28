@@ -44,6 +44,11 @@ class note extends DataBase{
         $res->execute(array($articleId));
         return count($res->fetchAll(PDO::FETCH_ASSOC));
     }
+    public function count(){
+        $res = $this->pdo->prepare("select * from article_notes");
+        $res->execute();
+        return count($res->fetchAll(PDO::FETCH_ASSOC));
+    }
 
 }
 

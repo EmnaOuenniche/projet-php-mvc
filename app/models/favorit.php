@@ -21,10 +21,10 @@ class favorit extends DataBase{
         return $res->execute(array($userId,$articleId));
     }
 
-    // public function removeById($id){
-    //     $res = $this->pdo->prepare("delete from article_fav where id = ?");
-    //     return $res->execute(array($id));
-    // }
+    public function removeById($id){
+        $res = $this->pdo->prepare("delete from article_fav where id = ?");
+        return $res->execute(array($id));
+    }
 
     public function isfavorit($userId,$articleId){
         $res = $this->pdo->prepare("select * from article_fav where article_id = ? and user_id = ?");
@@ -37,7 +37,7 @@ class favorit extends DataBase{
     }
 
     public function getFavoritsByUserId($userId){
-        $res = $this->pdo->prepare("select * from article_fav,articles where article_fav.user_id = ? and article_fav.article_id = articles.id");
+        $res = $this->pdo->prepare("select * from article_fav where user_id = ?");
         $res->execute(array($userId));
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -17,12 +17,10 @@ class user extends DataBase{
         return true;
     }
     
-    public function edit($id,$name,$email,$pass){
-
-    }
     
     public function delete($id){
-        
+        $res = $this->pdo->prepare("delete from users where id = ?");
+        return $res->execute(array($id));
     }
 
     public function login($email,$pass){
@@ -54,12 +52,22 @@ class user extends DataBase{
             return false;
         }
     }
-
+    public function getAll(){
+        $res = $this->pdo->prepare("select id,name,email,role from users");
+        $res->execute();
+        return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function logout(){
         unset($_SESSION['id']);
         unset($_SESSION['role']);
         header('location:index.php?controller=userController&page=login');
+    }
+
+    public function count(){
+        $res = $this->pdo->prepare("select * from users");
+        $res->execute();
+        return count($res->fetchAll(PDO::FETCH_ASSOC));
     }
 
 

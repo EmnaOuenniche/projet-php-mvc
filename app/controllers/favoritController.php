@@ -24,19 +24,11 @@ class favoritController extends Controller{
 
     public function remove(){
         if($this->user->isConnected()){
-            if(isset($_GET['user_id']) && isset($_GET['article_id'])){
-                $this->favorit->remove($_GET['user_id'],$_GET['article_id']);
-                header('location:?controller=favoritController&page=listFavorit');
-            }
-        }else{
-            header('location:index.php?controller=userController&page=login');
-        }
-    }
-
-    public function removeById(){
-        if($this->user->isConnected()){
-            if(isset($_GET['user_id']) && isset($_GET['article_id'])){
-                $this->favorit->remove($_GET['user_id'],$_GET['article_id']);
+            if(isset($_GET['id'])){
+                
+                $deleted = $this->favorit->removeById($_GET['id']);
+                
+                
                 header('location:?controller=favoritController&page=listFavorit');
             }
         }else{
@@ -47,6 +39,10 @@ class favoritController extends Controller{
     public function listFavorit(){
         if($this->user->isConnected()){
             $favorisList = $this->favorit->getFavoritsByUserId($_SESSION['id']);
+            
+            for($i=0;$i<count($favorisList);$i++){
+                $favorisList[$i]['title'] = $this->article->getById($favorisList[$i]['article_id'])['title'];
+            }
             $this->view('home/favorit/listFavorit',$data = ["articles"=>$favorisList]);
         }else{
             header('location:index.php?controller=userController&page=login');

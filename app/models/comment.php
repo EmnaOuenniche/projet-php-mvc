@@ -16,8 +16,13 @@ class comment extends DataBase{
         return $res->fetchAll(PDO::FETCH_ASSOC);
     }
     public function delete($id){
-        $res = $this->pdo->prepare("delete from banners where id = ?");
+        $res = $this->pdo->prepare("delete from article_comments where id = ?");
         return $res->execute(array($id));
+    }
+    public function count(){
+        $res = $this->pdo->prepare("select * from article_comments");
+        $res->execute();
+        return count($res->fetchAll(PDO::FETCH_ASSOC));
     }
 
 }

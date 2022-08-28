@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>'.$article['title'].'</td>
                                         <td>
-                                            <a href="?controller=favoritController&page=remove&article_id='.$article['article_id'].'&user_id='.$article['user_id'].'" class="btn btn-sm btn-danger">Supprimer</a>
+                                            <a href="?controller=favoritController&page=remove&id='.$article['id'].'" class="btn btn-sm btn-danger">Supprimer</a>
                                         </td>
                                     </tr>
                                 ';

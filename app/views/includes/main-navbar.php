@@ -20,8 +20,12 @@
             if($_SESSION['role'] == "1"){
               // lecteur - Admin
               echo '
-                <li class="nav-item"><a href="?controller=adminController&page=listArticles" class="nav-link link-dark px-2">Articles</a></li>
+                <li class="nav-item"><a href="?controller=adminController&page=addArticle" class="nav-link link-dark px-2">Ajouter un Article</a></li>
+                <li class="nav-item"><a href="?controller=articleController&page=myArticles" class="nav-link link-dark px-2">Mes Articles</a></li>
+                <li class="nav-item"><a href="?controller=adminController&page=listArticles" class="nav-link link-dark px-2">Tous les articles</a></li>
                 <li class="nav-item"><a href="?controller=adminController&page=users" class="nav-link link-dark px-2">Utilisateurs</a></li>
+                <li class="nav-item"><a href="?controller=adminController&page=statistiques" class="nav-link link-dark px-2">Statistiques</a></li>
+
               ';
             }
           }
@@ -32,7 +36,6 @@
           if(isset($_SESSION['id']) && isset($_SESSION['role'])){
 
             echo '
-              <li class="nav-item"><a href="?controller=userController&page=myAccount" class="nav-link link-dark px-2">Mon Compte</a></li>
               <li class="nav-item"><a href="?controller=userController&page=logout" class="nav-link link-dark px-2">Déconnexion</a></li>
             ';
           }else{

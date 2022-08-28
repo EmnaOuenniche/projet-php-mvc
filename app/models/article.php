@@ -8,7 +8,7 @@ class article extends DataBase{
     
     public function add($title,$image,$content){
         $res = $this->pdo->prepare("insert into articles(title,image,content,date,user_id,status) values(?,?,?,?,?,?)");
-        $res->execute(array($title,$image,$content,time(),$_SESSION['id'],$_SESSION['role'] == "1" ? 0 : 1));
+        $res->execute(array($title,$image,$content,time(),$_SESSION['id'],$_SESSION['role'] == "1" ? 1 : 0));
         return true;
     }
     
@@ -20,8 +20,7 @@ class article extends DataBase{
     
     public function delete($id){
         $res = $this->pdo->prepare("delete from articles where id = ? ");
-        $res->execute(array($id));
-        return true;
+        return $res->execute(array($id));
     }
 
     public function getAll(){
@@ -55,6 +54,11 @@ class article extends DataBase{
         $res = $this->pdo->prepare("update articles set status = ? where id = ?");
         $res->execute(array(1,$id));
         return true;
+    }
+    public function count(){
+        $res = $this->pdo->prepare("select * from articles");
+        $res->execute();
+        return count($res->fetchAll(PDO::FETCH_ASSOC));
     }
 
 }

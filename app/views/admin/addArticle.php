@@ -16,16 +16,16 @@
     <div class="row pt-5 pb-5">
         <div class="col-sm-2"></div>
         <div class="col-sm-8" style="text-align:center;">
-            <h1>Modifier un article</h1><br>
+            <h1>Ajouter un article</h1><br>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Titre de l'articel</label>
-                    <input name="title" type="text" class="form-control" required value="<?=$data['article']['title']?>">
+                    <input name="title" type="text" class="form-control" required>
                 </div>
                 <br>
                 <div class="form-group" style="text-align:left;">
                     <label>Contenue de l'article</label>
-                    <input id="content" type="hidden" name="content" name="content" value="<?=$data['article']['content']?>">
+                    <input id="content" type="hidden" name="content" name="content">
                     <trix-editor input="content"></trix-editor>
                 </div>
                 <br>
@@ -33,20 +33,13 @@
                     <label>Choisir image de l'article</label>
                     <input class="form-control" type="file" name="image">
                 </div>
-                <br><br>
-                <img src="assets/uploads/<?=$data['article']['image']?>" width="300" height="300"><br><br>
-                <input type="submit" value="modifier un article" class="btn btn-primary">
+                <input type="submit" value="ajouter un article" class="btn btn-primary">
             </form>
         </div>
         <div class="col-sm-2"></div>
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('.summernote').summernote();
-    });
-</script>
 <script src="<?=$GLOBALS['BASE_URL']?>/assets/summernote/summernote-bs4.min.js" ></script>
 <script src="<?=$GLOBALS['BASE_URL']?>/assets/js/bootstrap.min.js"></script>
 </body>

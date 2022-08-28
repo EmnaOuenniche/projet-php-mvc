@@ -22,6 +22,27 @@ class adminController extends Controller{
         // statistics 
     }
 
+    public function addArticle(){
+        if($this->user->isConnected()){
+            if(isset($_POST['title']) || isset($_FILES["image"]) || isset($_POST['content'])){
+                
+                $filename = rand(1,10000).'-'.rand(1,10000).'-'.time().'-'.rand(1,10000).'-'.basename($_FILES["image"]["name"]) ;
+                $uploadfile = "./assets/uploads/".$filename;
+                
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile)) {
+                    $image = $filename;
+                } else {
+                    $image = "";
+                }
+
+                $this->article->add($_POST['title'],$image,$_POST['content']);
+            }
+            $this->view('admin/addArticle');
+        }else{
+            header('location:index.php?controller=userController&page=login');
+        }
+    }
+
     public function listArticles(){
         //list all articles
 
@@ -42,6 +63,10 @@ class adminController extends Controller{
         }else{
             header('location:index.php?controller=userController&page=login');
         }
+
+    }
+
+    public function editArticle($articleId){
 
     }
     
@@ -80,6 +105,47 @@ class adminController extends Controller{
                 $comments = $this->comment->delete($_GET['id']);
                 header('location:?controller=adminController&page=listArticles');
             }
+        }else{
+            header('location:index.php?controller=userController&page=login');
+        }
+    }
+
+
+    public function statistiques(){
+        if($this->user->isConnected() && $_SESSION['role'] == "1"){
+
+            $statistics = [
+                "users"=> $this->user->count(),
+                "comments"=> $this->comment->count(),
+                "articles"=>$this->article->count(),
+                "notes"=>$this->note->count(),
+            ];
+            $this->view('admin/statistiques',$data=["stats"=>$statistics]);
+        }else{
+            header('location:index.php?controller=userController&page=login');
+        }
+    }
+
+    public function users(){
+        if($this->user->isConnected() && $_SESSION['role'] == "1"){
+            $listUsers = $this->user->getAll();
+            $this->view('admin/users',$data=["users"=>$listUsers]);
+        }else{
+            header('location:index.php?controller=userController&page=login');
+        }
+    }
+
+    public function deleteUser(){
+        if($this->user->isConnected() && $_SESSION['role'] == "1"){
+            if(isset($_GET['id'])){
+                $deleteduser = $this->user->delete($_GET['id']); 
+                //delete all user comments
+                //delete all user articles 
+                //delete all users articles comments
+
+                header('location:?controller=adminController&page=users');
+            }
+            
         }else{
             header('location:index.php?controller=userController&page=login');
         }

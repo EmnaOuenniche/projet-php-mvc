@@ -16,7 +16,7 @@
         <div class="col-sm-10 pb-5">
             <div style="text-align:center;">
                 <h1 ><?=$data['article']['title']?></h1><br>
-                <img src="<?=$data['article']['image']?>" width="auto" height="500px"><br><br>
+                <img src="<?=$data['article']['image']?>" width="600px" height="auto"><br><br>
                 <p>
                     <b>Date Creation : </b> <?=$data['article']['date']?><br>
                     <b>Auteur / propriétaire : </b><?=$data['article']['user']?><br>
@@ -55,13 +55,13 @@
         </div>
         <div class="col-sm-2">
             <?php
-                if($data['article']['isFavorit']){
+                if(!$data['article']['isFavorit']){
                     echo '
-                        <a href="?controller=favoritController&page=add&user_id='.$_SESSION['id'].'&article_id='.$_GET['id'].'" class="btn btn-danger btn-sm">supprimer favoris</a>
+                        <a href="?controller=favoritController&page=add&user_id='.$_SESSION['id'].'&article_id='.$_GET['id'].'" class="btn btn-success btn-sm">Ajouter aux favoris</a>
                     ';
                 }else{
                     echo '
-                        <a href="?controller=favoritController&page=remove&user_id='.$_SESSION['id'].'&article_id='.$_GET['id'].'" class="btn btn-primary btn-sm">Ajouter au favoris</a>
+                        
                     ';
                 }
             ?>
