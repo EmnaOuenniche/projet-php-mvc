@@ -60,6 +60,10 @@ class article extends DataBase{
         $res->execute();
         return count($res->fetchAll(PDO::FETCH_ASSOC));
     }
+    public function deleteByUser($userId){
+        $res = $this->pdo->prepare("delete from articles where user_id=?");
+        return $res->execute(array($userId));
+    }
 
 }
 

@@ -14,18 +14,33 @@
     <div class="row pt-5">
         <div class="col-12 d-flex justify-content-center text-center">
             <form action="" method="POST">
+
                 <span>Inscription</span><br><br>
                 <div class="form-group">
-                    <input name="name" type="text" class="form-control" placeholder="Nom complet">
+                    <input name="name" type="text" class="form-control" placeholder="Nom complet" required>
                 </div><br>
                 <div class="form-group">
-                    <input name="email" type="email" class="form-control" placeholder="Email">
+                    <input name="email" type="email" class="form-control" placeholder="Email" required>
                 </div><br>
                 <div class="form-group">
-                    <input name="pass" type="password" class="form-control" placeholder="Mot de passe"><a href="#">Afficher/cacher le mot de passe</a>
+                    <input name="pass" type="password" class="form-control" placeholder="Mot de passe" required>
                 </div><br>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="role" value="a" checked required>
+                    <label class="form-check-label">
+                        Lecteur
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="role" value="b" required>
+                    <label class="form-check-label">
+                        Auteur
+                    </label>
+                </div>
+                <br><br>
+
                 
-                <input type="submit" class="btn btn-primary" value="connexion"/>
+                <input type="submit" class="btn btn-primary" value="Inscription"/>
             </form>
         </div>
     </div>

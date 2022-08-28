@@ -41,7 +41,9 @@ class userController extends Controller {
             if(isset($_POST['email']) && isset($_POST['name']) && isset($_POST['pass'])){
                 //POST REQUEST
                 $user   = $this->model('user');
-                $result = $user->add($_POST['name'],$_POST['email'],$_POST['pass'],3);
+                
+                $result = $user->add($_POST['name'],$_POST['email'],$_POST['pass'],$_POST['role'] == "a" ? 3 : 2);
+                
                 if($result){
                     header('location:index.php?controller=userController&page=login');
                 }else{

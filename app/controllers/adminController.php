@@ -140,9 +140,9 @@ class adminController extends Controller{
             if(isset($_GET['id'])){
                 $deleteduser = $this->user->delete($_GET['id']); 
                 //delete all user comments
+                $this->comment->deleteByUser($_GET['id']);
                 //delete all user articles 
-                //delete all users articles comments
-
+                $this->article->deleteByUser($_GET['id']);
                 header('location:?controller=adminController&page=users');
             }
             

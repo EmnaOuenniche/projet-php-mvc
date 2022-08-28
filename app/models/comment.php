@@ -19,6 +19,10 @@ class comment extends DataBase{
         $res = $this->pdo->prepare("delete from article_comments where id = ?");
         return $res->execute(array($id));
     }
+    public function deleteByUser($userId){
+        $res = $this->pdo->prepare("delete from article_comments where user_id=?");
+        return $res->execute(array($userId));
+    }
     public function count(){
         $res = $this->pdo->prepare("select * from article_comments");
         $res->execute();

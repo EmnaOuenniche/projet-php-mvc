@@ -21,10 +21,10 @@
                     }
                 ?>
                 <div class="form-group">
-                    <input name="email" type="email" class="form-control" placeholder="Email">
+                    <input name="email" type="email" class="form-control" placeholder="Email" required>
                 </div><br>
                 <div class="form-group">
-                    <input name="pass" type="password" class="form-control" placeholder="Mot de passe">
+                    <input name="pass" type="password" class="form-control" placeholder="Mot de passe" required>
                 </div><br>
                 <input type="submit" class="btn btn-primary" value="connexion"/>
             </form>
