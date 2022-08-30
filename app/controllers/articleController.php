@@ -102,7 +102,7 @@ class articleController extends Controller {
                     if (move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile)) {
                         $image = $filename;
                     } else {
-                        $image = "";
+                        $image = $articleDetailes['image'];
                     }
                 }else{
                    $image = $articleDetailes['image'];
