@@ -25,13 +25,13 @@
                 <br>
                 <div class="form-group" style="text-align:left;">
                     <label>Contenue de l'article</label>
-                    <input id="content" type="hidden" name="content" name="content">
+                    <input id="content" type="hidden" name="content" name="content" required>
                     <trix-editor input="content"></trix-editor>
                 </div>
                 <br>
                 <div class="mb-3">
                     <label>Choisir image de l'article</label>
-                    <input class="form-control" type="file" name="image">
+                    <input class="form-control" type="file" name="image" required>
                 </div>
                 <input type="submit" value="ajouter un article" class="btn btn-primary">
             </form>

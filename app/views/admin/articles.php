@@ -61,8 +61,8 @@
                                         <td>'.$article['user'].'</td>
                                         <td>
                                             <a href="?controller=articleController&page=article&id='.$article['id'].'" target="_blanc" class="btn btn-sm btn-success">Afficher</a>
-                                            <a href="" class="btn btn-sm btn-warning">Modifier</a>
-                                            <a href="" class="btn btn-sm btn-danger">Supprimer</a>
+                                            <a href="?controller=articleController&page=edit&id='.$article['id'].'" class="btn btn-sm btn-warning">Modifier</a>
+                                            <a href="?controller=articleController&page=delete&id='.$article['id'].'" class="btn btn-sm btn-danger">Supprimer</a>
                                             <a href="?controller=adminController&page=comments&id='.$article['id'].'" class="btn btn-sm btn-secondary">Avis</a>
                                         </td>
                                     </tr>

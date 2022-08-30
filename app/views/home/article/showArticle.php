@@ -38,7 +38,7 @@
             <form action="?controller=commentController&page=add&user_id=<?=$_SESSION['id']?>&article_id=<?=$_GET['id']?>" method="POST">
                 <div class="mb-3">
                     <label  class="form-label">Ecrire un Commentaire</label>
-                    <textarea class="form-control" name="comment" rows="3"></textarea>
+                    <textarea class="form-control" name="comment" rows="3" required></textarea>
                 </div>
                 <input type="submit" class="btn btn-primary btn-sm" value="ajouter commentaire">
             </form>
