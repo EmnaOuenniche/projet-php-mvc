@@ -110,10 +110,10 @@ class articleController extends Controller {
                 
 
                 $edited = $this->article->edit($articleDetailes['id'],$_POST['title'],$image,$_POST['content']);
-            }
-            if($edited){
                 header('location:?controller=articleController&page=edit&id='.$articleDetailes['id']);
             }
+
+                
             $this->view('home/article/editArticle',["article"=>$articleDetailes]);
         }else{
             header('location:index.php?controller=userController&page=login');
